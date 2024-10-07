@@ -72,7 +72,7 @@ class Channels(PluginChannels):
                     else:
                         thumbnail_size = self.get_thumbnail_size(thumbnail, 2, ch_id)
                 else:
-                    enabled = True
+                    enabled = False
                     hd = 0
                     thumbnail_size = self.get_thumbnail_size(thumbnail, 2, ch_id)
 
