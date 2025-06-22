@@ -89,7 +89,7 @@ class Channels(PluginChannels):
                              self.config_obj.data['main']['uuid'] +
                              str(counter))
                 counter += 1
-                channel = channel_dict['number']
+                ch_num = channel_dict['number']
                 friendly_name = channel_dict['name']
                 if channel_dict['category'] in plutotv_groups:
                     groups_other = plutotv_groups[channel_dict['category']]
@@ -100,11 +100,15 @@ class Channels(PluginChannels):
                         .format(channel_dict['category']))
                     groups_other = re.sub('[ +&*%$#@!:;,<>?]', '', channel_dict['category'])
 
-                channel = {
+                if ch_db_data:
+                    channel = ch_db_data[0]
+                else:
+                    channel = {}
+                channel.update({
                     'id': ch_id,
                     'enabled': enabled,
                     'callsign': ch_callsign,
-                    'number': channel,
+                    'number': ch_num,
                     'name': friendly_name,
                     'HD': hd,
                     'group_hdtv': None,
@@ -113,7 +117,7 @@ class Channels(PluginChannels):
                     'thumbnail': thumbnail,
                     'thumbnail_size': thumbnail_size,
                     'stream_url': stream_url
-                }
+                })
                 ch_list.append(channel)
         return ch_list
 
